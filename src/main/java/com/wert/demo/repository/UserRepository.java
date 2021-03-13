@@ -1,14 +1,15 @@
 package com.wert.demo.repository;
 
 import com.wert.demo.domain.User;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.List;
+@Repository
+public interface UserRepository extends JpaRepository<User,Long> {
 
-public interface UserRepository {
+    User findByUsername(String username);
 
-    List<User>users=new ArrayList<>();
+
 
 
 
