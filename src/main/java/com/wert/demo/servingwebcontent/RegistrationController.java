@@ -26,8 +26,16 @@ public class RegistrationController {
             model.put("massage","User exist!");
             return "registration";
         }
+
+        user.setActive(true);
         userRepo.save(user);
 
         return "redirect:/login";
     }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
 }
