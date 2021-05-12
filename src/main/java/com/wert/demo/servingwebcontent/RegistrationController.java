@@ -5,6 +5,7 @@ import com.wert.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Map;
@@ -19,7 +20,7 @@ public class RegistrationController {
         return "registration";
     }
 
-    @PostMapping("registration")
+    @PostMapping("/registration")
     public String addUser(User user, Map<String,Object>model){
         User userFromDb= userRepo.findByUsername(user.getUsername());
         if(userFromDb!=null){
@@ -33,9 +34,6 @@ public class RegistrationController {
         return "redirect:/login";
     }
 
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
+
 
 }

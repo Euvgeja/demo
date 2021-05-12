@@ -11,7 +11,7 @@ import java.util.Collection;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
     private String username;
@@ -20,6 +20,16 @@ public class User implements UserDetails {
     private String password;
     private boolean active;
 
+    public User(){}
+
+    public User(Long id, String username, String lastName, String email, String password, boolean active) {
+        this.id = id;
+        this.username = username;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.active = active;
+    }
 
     public void setId(Long id) {
         this.id = id;
@@ -61,7 +71,9 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public void setActive(boolean b) { }
+    public void setActive(boolean b) {
+        this.active=b;
+    }
 
     public boolean isActive() {
         return active;
