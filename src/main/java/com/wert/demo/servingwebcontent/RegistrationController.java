@@ -1,6 +1,7 @@
 package com.wert.demo.servingwebcontent;
 
 import com.wert.demo.domain.User;
+import com.wert.demo.repository.UserRepoFromMemory;
 import com.wert.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +13,9 @@ import java.util.Map;
 @Controller
 public class RegistrationController {
     @Autowired
-    private UserRepository userRepo;
+    private UserRepository userRepository;
+    @Autowired
+    private UserRepoFromMemory userRepoFromMemory;
 
     @GetMapping("/registration")
     public String registration() {
@@ -20,19 +23,20 @@ public class RegistrationController {
     }
 
     @PostMapping("/registration")
-    public String addUser(User user, Map<String,Object>model){
-        User userFromDb= userRepo.findByUsername(user.getUsername());
-        if(userFromDb!=null){
-            model.put("massage","User exist!");
+    public String addUser(User user, Map<String, Object> model) {
+        User userFromDb = userRepoFromMemory.findByUserName(user.getUsername());
+//      User userFromDb = userRepository.findByUsername(user.getUsername());
+        if (userFromDb != null) {
+            model.put("massage", "User exist!");
             return "registration";
         }
 
         user.setActive(true);
-        userRepo.save(user);
+//      serRepository.save(user);
+        userRepoFromMemory.saveUser(user);
 
         return "redirect:/login";
     }
-
 
 
 }
