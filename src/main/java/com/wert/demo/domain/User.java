@@ -1,15 +1,13 @@
 package com.wert.demo.domain;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "usr")
-public class User implements UserDetails {
+public class User{
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -22,6 +20,16 @@ public class User implements UserDetails {
     private String password;
     private boolean active;
 
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+
+    private Set<Role> roles = new HashSet<>();
+
     public User(){}
 
     public User(Long id, String username, String lastName, String email, String password, boolean active) {
@@ -32,6 +40,15 @@ public class User implements UserDetails {
         this.password = password;
         this.active = active;
     }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
 
     public void setId(Long id) {
         this.id = id;
@@ -81,25 +98,4 @@ public class User implements UserDetails {
         return active;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
-    @Override
-    public boolean isEnabled() {
-        return isActive();
-    }
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
 }

@@ -24,16 +24,16 @@ public class RegistrationController {
 
     @PostMapping("/registration")
     public String addUser(User user, Map<String, Object> model) {
-        User userFromDb = userRepoFromMemory.findByUserName(user.getUsername());
-//      User userFromDb = userRepository.findByUsername(user.getUsername());
+//    User userFromDb = userRepoFromMemory.findByUserName(user.getUsername());
+      User userFromDb = userRepository.findByUsername(user.getUsername());
         if (userFromDb != null) {
             model.put("massage", "User exist!");
             return "registration";
         }
 
         user.setActive(true);
-//      serRepository.save(user);
-        userRepoFromMemory.saveUser(user);
+        userRepository.save(user);
+//      userRepoFromMemory.saveUser(user);
 
         return "redirect:/login";
     }
