@@ -18,9 +18,11 @@
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+>
 <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <title>Login page </title>
+
 </head>
 <body>
 <h1> Login page</h1>
@@ -31,11 +33,13 @@
     You have been logged out.
 </div>
 <form th:action="@{/login}" method="POST">
-    <label for="username"> Username : </label>
-    <input type="text" id="username" name="username"autofocus="autofocus" /> <br />
-    <label for="password"> Password:</label>
-    <!--    <input type="text" id="username" name="username" autofocus="autofocus" /> <br />-->
-    <input type="password" id="password" name="password"autofocus="autofocus" /> <br />
+
+<!--    <label for="username"> Username : </label>-->
+
+    <input placeholder="Username" type="text" id="username" name="username"autofocus="autofocus" /> <br />
+<!--    <label for="password"> Password:</label>-->
+
+    <input placeholder="Password" type="password" id="password" name="password"autofocus="autofocus" /> <br />
     <div><input type="submit" value="Sign In"/></div>
 </form>
 <a href="/registration">Add new user</a>

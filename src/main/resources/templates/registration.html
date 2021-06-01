@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+>
 <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <title>Spring Security Example </title>
 </head>
 <body>
+<h1> Registration page</h1>
+
 <div th:if="${param.error}">
     Invalid username and password.
 </div>
@@ -15,10 +18,10 @@
     User exist! </div>
 
 <form th:action="@{/registration}" method="post">
-    <div><label> Name      : <input type="text" name="username"/> </label></div>
-    <div><label> Last Name : <input type="text" name="lastName"/> </label></div>
-    <div><label> Email     : <input type="text" name="email"/> </label></div>
-    <div><label> Password  : <input type="password" name="password"/> </label></div>
+    <div> <input placeholder="Username" type="text" name="username"/> </div>
+    <div> <input placeholder="Last Name" type="text" name="lastName"/></div>
+    <div> <input placeholder="Email" type="text" name="email"/> </div>
+    <div> <input placeholder="Password" type="password" name="password"/> </div>
     <div><input type="submit" value="Sign In"/></div>
 </form>
 <a href="/">EXIT</a>
